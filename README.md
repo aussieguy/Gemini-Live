@@ -30,7 +30,7 @@ I was interested more in only the audio and video capabilities and just implemen
 1. Get your API key from Google AI Studio
 2. Clone the repository
 
-   git clone https://github.com/aussieguy.github.io/gemini-2-live-demo.git
+   git clone https://github.com/aussieguy/Gemini-Live
 
 3. Start the development server (adjust port if needed):
 
