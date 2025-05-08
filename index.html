@@ -10,11 +10,11 @@
   </head>
 
   <body style="background-image: url('./images/Stars.png');">
-      <button type="button" id="apiKeyBtn">Api key</button>
       <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="gemvalidaty" data-description="Support me on Buy me a coffee!" data-message="Magic runs on coffee." data-color="#5F7FFF" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
       
       <div class="container">
-    
+        <button type="button" id="apiKeyBtn">Api key</button>
+  
       <h1 style="color:white;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
         Talk to Gemini live 
@@ -36,7 +36,8 @@
         left: 550px;"
         display: none;
         hidden="true">
-    </div>
+        <button type="button" id="cameraStopBtn" class="camera-stop-btn"></button>
+      </div>
 
     </div>
 
@@ -100,10 +101,10 @@
       .modal-overlay {
         display: none;
         position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
+        top: 50;
+        left: 50;
+        right: 50;
+        bottom: 200;
         background: rgba(0,0,0,0.7);
         z-index: 999;
       }
@@ -122,6 +123,13 @@
 
     <!-- Set initial style elements for microphone, webcam and apikey buttons -->
     <script type="module">
+      // Check if the API key is set in local storage
+      const apiKey = localStorage.getItem('apiKey');
+      if (!apiKey ) {
+        document.getElementById('apiKeyBtn').innerHTML = "Set API Key";
+        document.getElementById('apiKeyBtn').style.color = 'red';
+      }
+
       document.getElementById('micBtn').style.backgroundImage = "url('./images/microphone-muted.png')";
       document.getElementById('micBtn').style.backgroundSize = 'contain';
       document.getElementById('micBtn').style.backgroundPosition = 'center';
@@ -143,6 +151,8 @@
           localStorage.setItem('apiKey', apiKey);
           closeApiKeyModal();
         }
+        // Reload the page to apply the new API key
+        location.reload();
       };
 
       window.closeApiKeyModal = function() {
@@ -154,6 +164,7 @@
         document.getElementById('apiKeyModal').style.display = 'block';
         document.getElementById('apiKeyOverlay').style.display = 'block';
       });
+
     </script>
     
 

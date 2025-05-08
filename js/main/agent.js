@@ -80,6 +80,16 @@ export class GeminiAgent{
         this.name = name;
         this.url = url;
         this.client = null;
+
+        // Add event listener for camera stop button
+        document.addEventListener('camera_stop_clicked', async () => {
+// Stop camera capture when the button is clicked - this is not being done.
+console.log('Camera stop clicked');
+
+            if (this.audioRecorder && this.audioRecorder.stream) {
+                this.audioRecorder.stop();
+            }
+        });
     }
 
     setupEventListeners() {

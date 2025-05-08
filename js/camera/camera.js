@@ -31,6 +31,10 @@ export class CameraManager {
     showPreview() {
         if (this.previewContainer) {
             this.previewContainer.style.display = 'block';
+            const stopButton = document.getElementById('cameraStopBtn');
+            if (stopButton) {
+                stopButton.style.display = 'block';
+            }
         }
     }
 
@@ -40,6 +44,10 @@ export class CameraManager {
     hidePreview() {
         if (this.previewContainer) {
             this.previewContainer.style.display = 'none';
+            const stopButton = document.getElementById('cameraStopBtn');
+            if (stopButton) {
+                stopButton.style.display = 'none';
+            }
         }
     }
 
@@ -142,8 +150,9 @@ export class CameraManager {
             if (previewContainer) {
                 previewContainer.appendChild(this.videoElement);
                 this.previewContainer = previewContainer;
-                this._createSwitchButton(); // Add switch button
-                this.showPreview(); // Show preview when initialized
+                this._createSwitchButton();
+                this._initializeStopButton();
+                this.showPreview();
             }
             
             await this.videoElement.play();
@@ -166,6 +175,52 @@ export class CameraManager {
             this.isInitialized = true;
         } catch (error) {
             throw new Error(`Failed to initialize camera: ${error.message}`);
+        }
+    }
+
+    /**
+     * Initialize the stop button functionality
+     * @private
+     */
+    _initializeStopButton() {
+        const stopButton = document.getElementById('cameraStopBtn');
+        if (stopButton) {
+            stopButton.addEventListener('click', () => {
+                // Stop camera
+                this.dispose();
+                
+                // Update camera button state
+                const cameraBtn = document.getElementById('cameraBtn');
+                if (cameraBtn) {
+                    cameraBtn.style.backgroundImage = "url('./images/webcam-muted.png')";
+                    cameraBtn.style.backgroundSize = 'contain';
+                    cameraBtn.style.backgroundPosition = 'center';
+                    cameraBtn.style.backgroundRepeat = 'no-repeat';
+                    cameraBtn.style.width = '60px';
+                    cameraBtn.style.height = '60px';    
+                    
+                    cameraBtn.classList.remove('active');
+              
+                }
+
+                // Update microphone button state and stop audio
+                const micBtn = document.getElementById('micBtn');
+                if (micBtn) {
+
+                    micBtn.style.backgroundImage = "url('./images/microphone-muted.png')";
+                    micBtn.style.backgroundSize = 'contain';
+                    micBtn.style.backgroundPosition = 'center';
+                    micBtn.style.backgroundRepeat = 'no-repeat';
+                    micBtn.style.width = '60px';
+                    micBtn.style.height = '60px';
+
+                    micBtn.classList.remove('active');
+                }
+
+                // Emit a custom event that the agent can listen to
+                const event = new CustomEvent('camera_stop_clicked');
+                document.dispatchEvent(event);
+            });
         }
     }
 
