@@ -23,7 +23,6 @@
       <div>
         <button autofocus type="button" id="micBtn" style="margin-right: 50px;"></button>
         <button type="button" id="cameraBtn" style="margin-right: 50px;"></button>
-        <button type="button" id="cameraDirectionBtn"></button>
       </div>
   
       <!-- Camera preview is for the webcam -->
@@ -32,16 +31,14 @@
         max-width: 350px; 
         height: auto;
         aspect-ratio: 16/9;
-        border: 1px solid blue;
-        border-radius: 8px;
         position: absolute;
-        top: 10%;
+        top: 1%;
         left: 50%;
         transform: translateX(-50%);
         display: none;"
         hidden="true">
         <button type="button" id="cameraStopBtn" class="camera-stop-btn" style="
-          margin-top: 50%;">
+          margin-top: 35%;">          
         </button>
       </div>
 
@@ -176,18 +173,6 @@
       document.getElementById('apiKeyBtn').addEventListener('click', function() {
         document.getElementById('apiKeyModal').style.display = 'block';
         document.getElementById('apiKeyOverlay').style.display = 'block';
-      });
-
-      // Configure which camera to use
-      let cameraDirection = 'user'; // default to front camera
-      document.getElementById('cameraDirectionBtn').addEventListener('click', function() {
-        if (cameraDirection === 'user') {
-          cameraDirection = 'environment'; // switch to back camera
-        } else {
-          cameraDirection = 'user'; // switch to front camera
-        };
-        // Save to local storage 
-        localStorage.setItem('facingMode', cameraDirection);
       });
 
     </script>

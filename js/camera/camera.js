@@ -56,14 +56,22 @@ export class CameraManager {
      * @private
      */
     _createSwitchButton() {
-
-        console.log("Camera" + navigator.userAgent);
         // Only create button on mobile devices
         if (!/Mobi|Android/i.test(navigator.userAgent)) return;
 
         this.switchButton = document.createElement('button');
         this.switchButton.className = 'camera-switch-btn';
-        this.switchButton.innerHTML = '⟲';
+        
+        this.switchButton.style.backgroundImage = "url('./images/frontBackCamera.png')";
+        this.switchButton.style.backgroundSize = 'contain';
+        this.switchButton.style.backgroundPosition = 'center';
+        this.switchButton.style.backgroundRepeat = 'no-repeat';
+        this.switchButton.style.width = '30px';
+        this.switchButton.style.height = '30px';
+        this.switchButton.style.border = 'none';
+        this.switchButton.style.outline = 'none';
+        this.switchButton.style.cursor = 'pointer';
+
         this.switchButton.addEventListener('click', () => this.switchCamera());
         this.previewContainer.appendChild(this.switchButton);
     }
