@@ -10,10 +10,10 @@
   </head>
 
   <body style="background-image: url('./images/Stars.png');">
-      <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="gemvalidaty" data-description="Support me on Buy me a coffee!" data-message="Magic runs on coffee." data-color="#5F7FFF" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
-      
-      <div class="container">
-        <button type="button" id="apiKeyBtn">Api key</button>
+    <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="gemvalidaty" data-description="Support me on Buy me a coffee!" data-message="Magic runs on coffee." data-color="#5F7FFF" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+    
+    <div class="container">
+      <button type="button" id="apiKeyBtn">Api key</button>
   
       <h1 style="color:white;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
@@ -22,7 +22,8 @@
       
       <div>
         <button autofocus type="button" id="micBtn" style="margin-right: 50px;"></button>
-        <button type="button" id="cameraBtn"></button>
+        <button type="button" id="cameraBtn" style="margin-right: 50px;"></button>
+        <button type="button" id="cameraDirectionBtn"></button>
       </div>
   
       <!-- Camera preview is for the webcam -->
@@ -122,7 +123,7 @@
     </div>
 
     <!-- Set initial style elements for microphone, webcam and apikey buttons -->
-    <script type="module">
+    <script type="module">            
       // Check if the API key is set in local storage
       const apiKey = localStorage.getItem('apiKey');
       if (!apiKey ) {
@@ -144,6 +145,13 @@
       document.getElementById('cameraBtn').style.width = '60px';
       document.getElementById('cameraBtn').style.height = '60px';    
 
+      document.getElementById('cameraDirectionBtn').style.backgroundImage = "url('./images/frontBackCamera.png')";
+      document.getElementById('cameraDirectionBtn').style.backgroundSize = 'contain';
+      document.getElementById('cameraDirectionBtn').style.backgroundPosition = 'center';
+      document.getElementById('cameraDirectionBtn').style.backgroundRepeat = 'no-repeat';
+      document.getElementById('cameraDirectionBtn').style.width = '60px';
+      document.getElementById('cameraDirectionBtn').style.height = '60px';    
+
       // API Key Modal functionality
       window.saveApiKey = function() {
         const apiKey = document.getElementById('apiKeyInput').value;
@@ -163,6 +171,19 @@
       document.getElementById('apiKeyBtn').addEventListener('click', function() {
         document.getElementById('apiKeyModal').style.display = 'block';
         document.getElementById('apiKeyOverlay').style.display = 'block';
+      });
+
+      // Configure which camera to use
+      let cameraDirection = 'user'; // default to front camera
+      document.getElementById('cameraDirectionBtn').addEventListener('click', function() {
+        if (cameraDirection === 'user') {
+          cameraDirection = 'environment'; // switch to back camera
+        } else {
+          cameraDirection = 'user'; // switch to front camera
+        };
+        // Save to local storage 
+        localStorage.setItem('facingMode', cameraDirection);
+        console.log('Camera direction set to:', cameraDirection);
       });
 
     </script>

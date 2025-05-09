@@ -12,7 +12,7 @@
   padding: 2rem;
 }
 
-#micBtn, #cameraBtn {
+#micBtn, #cameraBtn, #cameraDirectionBtn {
   border: 1px solid #1a73e8;
   color: #1a73e8;
   padding: 10px 20px;

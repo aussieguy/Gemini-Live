@@ -56,6 +56,8 @@ export class CameraManager {
      * @private
      */
     _createSwitchButton() {
+
+        console.log("Camera" + navigator.userAgent);
         // Only create button on mobile devices
         if (!/Mobi|Android/i.test(navigator.userAgent)) return;
 
