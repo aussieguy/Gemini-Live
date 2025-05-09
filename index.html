@@ -28,16 +28,21 @@
   
       <!-- Camera preview is for the webcam -->
       <div id="cameraPreview" class="camera-preview" style="
-        bottom: 500px;
-        width: 350px; 
-        height: 200px;
+        width: 90%; 
+        max-width: 350px; 
+        height: auto;
+        aspect-ratio: 16/9;
         border: 1px solid blue;
         border-radius: 8px;
         position: absolute;
-        left: 550px;"
-        display: none;
+        top: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+        display: none;"
         hidden="true">
-        <button type="button" id="cameraStopBtn" class="camera-stop-btn"></button>
+        <button type="button" id="cameraStopBtn" class="camera-stop-btn" style="
+          margin-top: 50%;">
+        </button>
       </div>
 
     </div>
